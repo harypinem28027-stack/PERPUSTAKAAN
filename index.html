@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <title>Login Akun</title>
+    <link rel="stylesheet" href="assets/css/login.css">
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="main-wrapper">
+    <header class="form-header">
+        <h1>Login Akun</h1>
+        <p>Silakan isi data Anda dengan lengkap dan benar.</p>
+    </header>
+
+<div class="form-container">
+    <form action="assets/php/login.php" method="post" class="user-form" id="loginForm">
+        <div class="input-group">
+            <label>Email</label>
+            <input type="text" id="email_input" name="email" placeholder="Masukkan Email Anda" required>
+        </div>
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="password" name="sandi" placeholder="Masukkan sandi Anda" required>
+            <div class="showcheck">
+                <input type="checkbox" id="showPass">
+                <span>Show Password</span>
+                </div>
+            </div>
+            <button type="submit" class="submit-button">MASUK</button>
+            <div id="result" style="margin-top:10px;color:red;"></div>
+        </form>
+    </div>
+</div>
+
+<script src="assets/java/data.js"></script>
+</body>
+</html>

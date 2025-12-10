@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Pelacakan Pengembalian</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+    }
+  </style>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#007AFF", // Updated primary color for iOS feel
+            "background-light": "#F2F2F7",
+            "background-dark": "#101922",
+            "card-light": "#ffffff",
+            "card-dark": "#1c1c1e",
+            "text-primary-light": "#1C1C1E",
+            "text-primary-dark": "#ffffff",
+            "text-secondary-light": "#617589",
+            "text-secondary-dark": "#8e8e93",
+            "accent-red": "#FF3B30",
+          },
+          fontFamily: {
+            "display": ["Inter", "sans-serif"]
+          },
+          borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px" },
+        },
+      },
+    }
+  </script>
+  <style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+
+<body class="font-display bg-background-light dark:bg-background-dark">
+  <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root">
+    <!-- Top App Bar -->
+    <header class="sticky top-0 z-10 flex flex-col bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+      <div class="flex items-center p-4 pb-2 justify-between">
+        <div
+          class="flex size-10 shrink-0 items-center justify-center text-text-primary-light dark:text-text-primary-dark">
+          <a href="menu.html" class="no-underline text-inherit">
+            <span class="material-symbols-outlined text-3xl">arrow_back_ios_new</span>
+          </a>
+        </div>
+        <h1
+          class="text-text-primary-light dark:text-text-primary-dark text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">
+          Pelacakan Pengembalian</h1>
+        <div class="size-10 shrink-0"></div>
+      </div>
+    </header>
+    <main class="flex-grow">
+      <!-- Search Bar -->
+      <div class="px-4 py-3">
+        <label class="flex flex-col min-w-40 h-12 w-full">
+          <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+            <div
+              class="text-text-secondary-light dark:text-text-secondary-dark flex border-none bg-card-light dark:bg-card-dark items-center justify-center pl-3 rounded-l-lg border-r-0">
+              <span class="material-symbols-outlined">search</span>
+            </div>
+            <input
+              class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-primary-light dark:text-text-primary-dark focus:outline-0 focus:ring-0 border-none bg-card-light dark:bg-card-dark focus:border-none h-full placeholder:text-text-secondary-light dark:placeholder:text-text-secondary-dark px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
+              placeholder="Cari buku atau anggota" value="" />
+          </div>
+        </label>
+      </div>
+      <!-- Filter Chips -->
+      <div class="flex gap-3 px-4 pb-4 overflow-x-auto">
+        <a href="pelacakan.html?filter=semua"
+          class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary pl-4 pr-4 no-underline">
+          <p class="text-white text-sm font-medium leading-normal">Semua</p>
+        </a>
+        <a href="pelacakan.html?filter=terlambat"
+          class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-card-light dark:bg-card-dark pl-4 pr-4 no-underline hover:bg-gray-100 dark:hover:bg-gray-800">
+          <p class="text-text-primary-light dark:text-text-primary-dark text-sm font-medium leading-normal">Terlambat
+          </p>
+        </a>
+        <a href="pelacakan.html?filter=hari-ini"
+          class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-card-light dark:bg-card-dark pl-4 pr-4 no-underline hover:bg-gray-100 dark:hover:bg-gray-800">
+          <p class="text-text-primary-light dark:text-text-primary-dark text-sm font-medium leading-normal">Jatuh Tempo
+            Hari Ini</p>
+        </a>
+      </div>
+      <div class="flex flex-col gap-4 px-4 pb-4">
+        <!-- List Item - Overdue -->
+        <div class="flex flex-col gap-4 bg-card-light dark:bg-card-dark p-4 rounded-xl shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-lg w-[70px] h-[93px] shrink-0"
+              data-alt="Book cover for The Psychology of Money"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAhUD40uiuOQdAIUqzu-4_xjIh9GbXl-yy5u_MroOe9OOlP8pOlYv29bt_F-ymP5J_hxfpjilqyc2BN7j7TE0ifSmhExWVy_M6IdT-wxKfhgIcRdAJLFRD7BEjqpUXjd_EZSaGN7mvIc-Nafhoov1F88FJSxH3fIDyMoArj3Qkut1WGaGqmXc-Xp6eOTbI8nFiBXjFXJ8OrL4Mar3B3cZaefQE8BLOv93ZebVALTuq-sJAqQxYJH1w6eYhx8KVgDqHr7JmWKd8yqg");'>
+            </div>
+            <div class="flex flex-1 flex-col justify-center gap-1">
+              <p class="text-text-primary-light dark:text-text-primary-dark text-base font-semibold leading-tight">The
+                Psychology of Money</p>
+              <p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal">Andi
+                Pratama (ID: 12345)</p>
+              <p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal">Tgl.
+                Pinjam: 18 Des 2023</p>
+              <p class="text-accent-red text-sm font-medium leading-normal flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-base">error</span>
+                <span>Terlambat: 25 Des 2023</span>
+              </p>
+            </div>
+          </div>
+          <button
+            class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-semibold leading-normal">
+            <span class="truncate">Tandai Kembali</span>
+          </button>
+        </div>
+        <!-- List Item - On Time -->
+        <div class="flex flex-col gap-4 bg-card-light dark:bg-card-dark p-4 rounded-xl shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-lg w-[70px] h-[93px] shrink-0"
+              data-alt="Book cover for Sapiens"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDIA2LpF_alEl5w7qmpAkxPZDLOMs9-TRVfSsA60_CELI63Q63YS-BxzKew32di6LJysRDFTWH4tlhEGc1LDGx1Vu5fEtaY5cv-AZiGEiNmyaJzpcJUyjix_PyoTavyegttrTUkJz9iqlqt65iaplWEFzKcnCqGiFLL14xPFEkPJd5abV1URIswrt7mRsIRyBhy5GvNa0MTfoWJh43T_Rtq--WtEQFdn2tjTCwjNOxQQQTM41q78g-FGfUtSZx0wXY2qOwqtZZhAA");'>
+            </div>
+            <div class="flex flex-1 flex-col justify-center gap-1">
+              <p class="text-text-primary-light dark:text-text-primary-dark text-base font-semibold leading-tight">
+                Sapiens: A Brief History</p>
+              <p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal">Budi
+                Santoso (ID: 67890)</p>
+              <p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal">Tgl.
+                Pinjam: 21 Des 2023</p>
+              <p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal">
+                Jatuh Tempo: 28 Des 2023</p>
+            </div>
+          </div>
+          <button
+            class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/20 dark:bg-primary/30 text-primary text-sm font-semibold leading-normal">
+            <span class="truncate">Tandai Kembali</span>
+          </button>
+        </div>
+        <!-- List Item - Due Today -->
+        <div class="flex flex-col gap-4 bg-card-light dark:bg-card-dark p-4 rounded-xl shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-lg w-[70px] h-[93px] shrink-0"
+              data-alt="Book cover for Atomic Habits"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBgX38FvUmdtXdhcHWNJOc0SY2qr14NdtOvf4DirG-tOklu1wb4ipBsSCvMMTmJfAsDElPdqhmuXOcOdWNX-3Eg8rJ44pky2XK0r-L32-QKEusaY8CezDfHRozjAvJpyNahnMfFcoqKVdi9AAN-sq43ZJA8y_jRKy1TD5BFZdAomE8BbviMcylRZRHSheWmGQMz_3svXxeu5hyyLKKSg1IPxqxc-ZZZcDXshnmHccpmGI10R4EhWGFvG0NSoA-jtXHsucKJ7xuQdw");'>
+            </div>
+            <div class="flex flex-1 flex-col justify-center gap-1">
+              <p class="text-text-primary-light dark:text-text-primary-dark text-base font-semibold leading-tight">
+                Atomic Habits</p>
+              <p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal">
+                Citra Lestari (ID: 54321)</p>
+              <p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal">Tgl.
+                Pinjam: 20 Des 2023</p>
+              <p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-medium leading-normal">
+                Jatuh Tempo Hari Ini</p>
+            </div>
+          </div>
+          <button
+            class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/20 dark:bg-primary/30 text-primary text-sm font-semibold leading-normal">
+            <span class="truncate">Tandai Kembali</span>
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="assets/java/trackingSearch.js"></script>
+  <script src="assets/java/trackingReturn.js"></script>
+</body>
+
+</html>
